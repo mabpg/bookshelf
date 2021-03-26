@@ -7,14 +7,14 @@ import {Modal, ModalContents, ModalOpenButton} from './components/modal'
 import {Logo} from './components/logo'
 import {useAsync} from './utils/hooks'
 
-function LoginForm({onSubmit, submitButton}) {
+function LoginForm({onSubm, submitButton}) {
   const {isLoading, isError, error, run} = useAsync()
   function handleSubmit(event) {
     event.preventDefault()
     const {username, password} = event.target.elements
 
     run(
-      onSubmit({
+      onSubm({
         username: username.value,
         password: password.value,
       }),
@@ -59,6 +59,7 @@ function LoginForm({onSubmit, submitButton}) {
 }
 
 function UnauthenticatedApp({login, register}) {
+  console.log(login)
   return (
     <div
       css={{
@@ -85,7 +86,7 @@ function UnauthenticatedApp({login, register}) {
           </ModalOpenButton>
           <ModalContents aria-label="Login form" title="Login">
             <LoginForm
-              onSubmit={login}
+              onSubm={login}
               submitButton={<Button variant="primary">Login</Button>}
             />
           </ModalContents>
@@ -96,7 +97,7 @@ function UnauthenticatedApp({login, register}) {
           </ModalOpenButton>
           <ModalContents aria-label="Registration form" title="Register">
             <LoginForm
-              onSubmit={register}
+              onSubm={register}
               submitButton={<Button variant="secondary">Register</Button>}
             />
           </ModalContents>
